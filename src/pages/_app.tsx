@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { ErrorBoundary } from '../src/components/ErrorBoundary';
 import { useMarketStore } from '../src/store/useMarketStore';
 import '../src/styles/globals.css';
+import '../styles/fonts.css';
+import '../styles/globals.css';
 
 function TradingApp({ Component, pageProps }: AppProps) {
   const setOnlineStatus = useMarketStore((state) => state.setOnlineStatus);
