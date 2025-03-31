@@ -63,4 +63,22 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
+// Example in your Layout component
+const Layout = ({ children }) => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  return (
+    <div>
+      <button onClick={() => setTheme(prev => prev === 'light' ? 'dark' : 'light')}>
+        Toggle Theme
+      </button>
+      {children}
+    </div>
+  );
+};
+
 export default TradingApp;
