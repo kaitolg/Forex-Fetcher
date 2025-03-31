@@ -1,0 +1,182 @@
+/* src/styles/globals.css */
+
+/* 1. Theme Variables */
+:root {
+  /* Primary Colors */
+  --color-primary: #2962ff;
+  --color-primary-dark: #0039cb;
+  
+  /* Financial Colors */
+  --color-bull: #26a69a;  /* Green for positive/up trends */
+  --color-bear: #ef5350;  /* Red for negative/down trends */
+  
+  /* Neutral Colors */
+  --color-background: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-border: #e0e0e0;
+  
+  /* Typography */
+  --color-text-primary: #212121;
+  --color-text-secondary: #757575;
+  
+  /* Chart Specific */
+  --chart-background: #ffffff;
+  --chart-grid-color: rgba(33, 33, 33, 0.1);
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #bdbdbd;
+  --chart-background: #1e1e1e;
+  --chart-grid-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 2. Base Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: clamp(14px, 1.2vw, 16px); /* Responsive base font size */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 3. Financial Typography */
+.financial-text {
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: -0.02em;
+}
+
+.price-up {
+  color: var(--color-bull);
+}
+
+.price-down {
+  color: var(--color-bear);
+}
+
+/* 4. Chart Container Styles */
+.chart-container {
+  position: relative;
+  background: var(--chart-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 5. Utility Classes */
+.flex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.data-card {
+  background: var(--color-surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* 6. Animations */
+@keyframes price-up-pulse {
+  0% { background-color: rgba(38, 166, 154, 0.1); }
+  50% { background-color: rgba(38, 166, 154, 0.3); }
+  100% { background-color: rgba(38, 166, 154, 0.1); }
+}
+
+@keyframes price-down-pulse {
+  0% { background-color: rgba(239, 83, 80, 0.1); }
+  50% { background-color: rgba(239, 83, 80, 0.3); }
+  100% { background-color: rgba(239, 83, 80, 0.1); }
+}
+
+.price-change-animation {
+  animation-duration: 1s;
+  animation-iteration-count: 3;
+}
+
+.price-change-up {
+  animation-name: price-up-pulse;
+}
+
+.price-change-down {
+  animation-name: price-down-pulse;
+}
+
+/* 7. Form Elements */
+input[type="number"].financial-input {
+  font-family: 'Roboto Mono', monospace;
+  text-align: right;
+  border: 1px solid var(--color-border);
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: var(--color-surface);
+}
+
+/* 8. Error States */
+.error-banner {
+  background: var(--color-bear);
+  color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 25%,
+    var(--color-border) 50%,
+    var(--color-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 9. Responsive Breakpoints */
+@media (max-width: 768px) {
+  .chart-container {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .data-card {
+    padding: 1rem;
+  }
+}
+
+/* 10. Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .chart-container {
+    page-break-inside: avoid;
+  }
+}
